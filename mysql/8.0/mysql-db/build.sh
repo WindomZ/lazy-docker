@@ -9,7 +9,7 @@ if [ ! "$(docker ps -q -f name=${name}-db)" ]; then
 
   # build mysql8.0-db container
   docker run \
-    -v ${volume}/mysql/data:/var/lib/mysql \
+    -v ${volume}/${name}/data:/var/lib/mysql \
     --name ${name}-db mysql:8.0 \
     echo "Data-only container for mysql" > /dev/null
 fi
