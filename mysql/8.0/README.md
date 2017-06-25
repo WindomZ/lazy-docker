@@ -17,7 +17,7 @@ First, make sure you have [Docker](https://docs.docker.com/) installed.
 > NOTE: If you do not plan to implement long-term deployment through configuration files,
 Please skip this section.
 
-1. Edit the `.env` file with your familiar text editor.
+1. Edit the [.env](https://github.com/WindomZ/lazy-docker/blob/master/mysql/8.0/.env) file with your familiar text editor.
 1. Please fill in your configuration information according to the notes.
 
 ### Execute
