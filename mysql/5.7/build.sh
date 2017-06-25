@@ -20,25 +20,25 @@ mysql_onetime_password=`sed '/^MYSQL_ONETIME_PASSWORD=/!d;s/.*=//' ${env}`
 [[ ! ${root_password} ]] && mysql_empty_password="yes" && unset mysql_random_password
 
 # remove mysql5.7 container
-if [ "$(echo "$(docker ps -aq -f name=mysql5.7 --format "{{.Names}}")" | grep -i '^mysql5.7$')" ]; then
-  docker rm -f mysql5.7 > /dev/null
+if [ "$(echo "$(docker ps -aq -f name=${name} --format "{{.Names}}")" | grep -i "^${name}$")" ]; then
+  docker rm -f ${name} > /dev/null
 fi
 
 # build mysql5.7-db container
-if [ ! "$(docker ps -q -f name=mysql5.7-db)" ]; then
-  if [ ! "$(docker ps -aq -f status=exited -f name=mysql5.7-db)" ]; then
+if [ ! "$(docker ps -q -f name=${name}-db)" ]; then
+  if [ ! "$(docker ps -aq -f status=exited -f name=${name}-db)" ]; then
     docker run \
       -v ${volume}/mysql/data:/var/lib/mysql \
-      --name mysql5.7-db mysql:5.7 \
+      --name ${name}-db mysql:5.7 \
       echo "Data-only container for mysql" > /dev/null
 
-    echo -e "Created \033[4mmysql5.7-db\033[0m \033[32mSuccessfully\033[0m!"
+    echo -e "Created \033[4m${name}-db\033[0m \033[32mSuccessfully\033[0m!"
   fi
 fi
 
 # build mysql5.7 container
 docker run --restart=always \
-  --volumes-from mysql5.7-db \
+  --volumes-from ${name}-db \
   -v ${volume}/mysql/conf:/etc/mysql/conf.d \
   -v ${volume}/mysql/logs:/log \
   -v ${volume}/mysql/share:/share \
@@ -50,6 +50,6 @@ docker run --restart=always \
   -e MYSQL_ALLOW_EMPTY_PASSWORD=${mysql_empty_password} \
   -e MYSQL_RANDOM_ROOT_PASSWORD=${mysql_random_password} \
   -e MYSQL_ONETIME_PASSWORD=${mysql_onetime_password} \
-  --name mysql5.7 -d mysql:5.7 > /dev/null
+  --name ${name} -d mysql:5.7 > /dev/null
 
-echo -e "Created \033[4mmysql5.7\033[0m \033[32mSuccessfully\033[0m!"
+echo -e "Created \033[4m${name}\033[0m \033[32mSuccessfully\033[0m!"
