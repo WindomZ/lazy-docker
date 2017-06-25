@@ -7,7 +7,7 @@ if [ ! "$(docker ps -q -f name=${name}-backup)" ]; then
   # build mysql5.7-backup container
   docker run -it --rm \
     --volumes-from ${name}-db \
-    -v ${volume}/mysql/backup:/backup \
+    -v ${volume}/${name}/backup:/backup \
     --name ${name}-backup mysql:5.7 \
     tar cvfP ${backup_file} /var/lib/mysql
 

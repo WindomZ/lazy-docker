@@ -28,7 +28,7 @@ fi
 if [ ! "$(docker ps -q -f name=${name}-db)" ]; then
   if [ ! "$(docker ps -aq -f status=exited -f name=${name}-db)" ]; then
     docker run \
-      -v ${volume}/mysql/data:/var/lib/mysql \
+      -v ${volume}/${name}/data:/var/lib/mysql \
       --name ${name}-db mysql:5.7 \
       echo "Data-only container for mysql" > /dev/null
 
@@ -39,9 +39,9 @@ fi
 # build mysql5.7 container
 docker run --restart=always \
   --volumes-from ${name}-db \
-  -v ${volume}/mysql/conf:/etc/mysql/conf.d \
-  -v ${volume}/mysql/logs:/log \
-  -v ${volume}/mysql/share:/share \
+  -v ${volume}/${name}/conf:/etc/mysql/conf.d \
+  -v ${volume}/${name}/logs:/log \
+  -v ${volume}/${name}/share:/share \
   -p ${port}:3306 \
   -e MYSQL_ROOT_PASSWORD=${root_password} \
   -e MYSQL_DATABASE=${mysql_database} \
