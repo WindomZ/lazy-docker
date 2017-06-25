@@ -1,20 +1,18 @@
-# lazy-docker
-[Home](https://github.com/WindomZ/lazy-docker#readme)
-
-## mysql5.7
+# lazy-docker - mysql5.7
 
 > Easily and quickly create mysql5.7 docker containers at the terminal.
 
-### Official
+## Feature
 
-- [DockerHub](https://hub.docker.com/_/mysql/)
-- [GitHub](https://github.com/docker-library/mysql/tree/master/5.7)
+- [x] [Build](#buildsh)
+- [x] [Backup](#backupsh)
+- [x] [Restore](#restoresh)
 
-### Usage
+## Usage
 
 First, make sure you have [Docker](https://docs.docker.com/) installed.
 
-#### Configuration
+### Configuration
 
 > NOTE: If you do not plan to implement long-term deployment through configuration files,
 Please skip this section.
@@ -22,11 +20,11 @@ Please skip this section.
 1. Edit the `.env` file with your familiar text editor.
 1. Please fill in your configuration information according to the notes.
 
-#### Execute
+### Execute
 
 Please open your terminal.
 
-##### **build.sh**
+#### **build.sh**
 
 > Interactive design, quickly to deploy MySQL container.
 
@@ -35,7 +33,7 @@ Run the following command at the terminal to deploy MySQL container:
 ./build.sh
 ```
 
-##### **backup.sh**
+#### **backup.sh**
 
 > Quickly backup MySQL container data.
 
@@ -44,7 +42,7 @@ Run the following command at the terminal to backup MySQL data:
 ./backup.sh
 ```
 
-##### **restore.sh**
+#### **restore.sh**
 
 > Quickly restore MySQL container data from backup file.
 
@@ -53,3 +51,10 @@ Run the following command at the terminal to restore MySQL data:
 ./restore.sh FILE
 ```
 The `FILE` see `backup.sh` result.
+
+## Official
+
+- [DockerHub](https://hub.docker.com/_/mysql/)
+- [GitHub](https://github.com/docker-library/mysql/tree/master/5.7)
+
+[<< GoBack](https://github.com/WindomZ/lazy-docker#readme)
