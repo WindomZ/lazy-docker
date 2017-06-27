@@ -12,14 +12,6 @@
 
 First, make sure you have [Docker](https://docs.docker.com/) installed.
 
-### Persistence
-
-> NOTE: If you do not plan to implement long-term deployment through configuration files,
-Please _skip_ this section.
-
-1. Edit the [.env](https://github.com/WindomZ/lazy-docker/blob/master/mysql/5.7/.env) file with your familiar text editor.
-1. Please fill in your configuration information according to the notes.
-
 ### Execute
 
 Please open your terminal.
@@ -51,6 +43,14 @@ Run the following command at the terminal to restore MySQL data:
 ./restore.sh FILE
 ```
 The `FILE` see `backup.sh` result.
+
+### Persistence
+
+> NOTE: If you do not plan to implement long-term deployment through configuration files,
+Please _skip_ this section.
+
+1. Edit the [.env](https://github.com/WindomZ/lazy-docker/blob/master/mysql/5.7/.env) file with your familiar text editor.
+1. Please fill in your configuration information according to the notes.
 
 ## Official
 
