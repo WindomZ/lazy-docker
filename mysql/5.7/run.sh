@@ -3,7 +3,7 @@ source ./.env.sh
 
 # specifies the MySQL port.
 port=`sed '/^DOCKER_PORT=/!d;s/.*=//' ${env}`
-[[ ! ${port} ]] && read -e -p "Enter the MySQL port: (3306) " port
+[[ ! ${port} ]] && read -e -p "Enter the MySQL port: [3306] " port
 [[ ! ${port} ]] && port=3306
 
 # specifies the password that will be set for the MySQL root superuser account.
