@@ -8,7 +8,7 @@
 
 Continuous improvement, lazy interactive design, for this purpose.
 
-## Feature
+## Support
 
 - [x] [MySQL](#mysql)
 - [ ] MongoDB
@@ -35,12 +35,9 @@ run as a [non-root](https://docs.docker.com/engine/installation/linux/linux-post
 
 ## Development
 
+Welcome your **Star**, make pull requests, report bugs, suggest ideas and discuss **lazy-docker**.
+
 I would love to hear what you think about **lazy-docker** on [issues page](https://github.com/WindomZ/lazy-docker/issues).
-Make pull requests, report bugs, suggest ideas and discuss **lazy-docker**.
-
-## Support
-
-Welcome your Star or Pull request.
 
 ## License
 
