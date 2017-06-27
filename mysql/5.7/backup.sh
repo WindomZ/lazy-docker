@@ -4,7 +4,7 @@ source .env.sh
 if [ ! "$(docker ps -q -f name=${name}-backup)" ]; then
   backup_file=/backup/${name}-$(date +%Y%m%d%H%M%S).tar
 
-  # build mysql5.7-backup container
+  # run mysql5.7-backup container
   docker run -it --rm \
     --volumes-from ${name}-db \
     -v ${volume}/${name}/backup:/backup \

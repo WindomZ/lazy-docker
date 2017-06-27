@@ -7,7 +7,7 @@ restore_file=`echo "${volume}/mysql/backup/$1" | sed "s/\/\//\//g"`
 [[ ! -f ${restore_file} ]] && echo -e "\033[31mNot found\033[0m the \033[4m${restore_file}\033[0m file" && exit 1
 
 if [ ! "$(docker ps -q -f name=${name}-restore)" ]; then
-  # build mysql5.7-restore container
+  # run mysql5.7-restore container
   docker run -it --rm \
     --volumes-from ${name}-db \
     -v ${volume}/${name}/backup:/backup \
