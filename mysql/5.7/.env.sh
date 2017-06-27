@@ -6,12 +6,12 @@ env=.env
 
 # specifies the name of docker container.
 name=`sed '/^DOCKER_NAME=/!d;s/.*=//' ${env}`
-[[ ! ${name} ]] && read -e -p "Enter the name of docker container: (mysql5.7) " name
+[[ ! ${name} ]] && read -e -p "Enter the name of docker container: [mysql5.7] " name
 [[ ! ${name} ]] && name="mysql5.7"
 
 # specifies the MYSQL data storage path.
 volume=`sed '/^DOCKER_VOLUME=/!d;s/.*=//' ${env}`
-[[ ! ${volume} ]] && read -e -p "Enter the directory path for the volume: (current path) " volume
+[[ ! ${volume} ]] && read -e -p "Enter the directory path for the volume: [current path] " volume
 [[ ! ${volume} ]] && volume=${PWD}
 
 export env
