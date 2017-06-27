@@ -7,7 +7,7 @@ if [ ! "$(docker ps -q -f name=${name}-db)" ]; then
     docker rm ${name}-db > /dev/null
   fi
 
-  # build mysql8.0-db container
+  # run mysql8.0-db container
   docker run \
     -v ${volume}/${name}/data:/var/lib/mysql \
     --name ${name}-db mysql:8.0 \
