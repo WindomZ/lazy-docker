@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1091,SC2015,SC2154
-[[ ! -r '.env.sh' ]] && (echo 'Not found .env file') && exit 1
-source .env.sh
+[[ ! -r '.env-mysql.sh' ]] && (echo 'Not found .env-mysql file') && exit 1
+source .env-mysql.sh
 
 # remove mysql8.0 container
 if docker ps -aq -f name="$name" --format "{{.Names}}" | grep -iq "^$name$"; then
