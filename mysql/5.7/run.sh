@@ -9,8 +9,8 @@ if docker ps -aq -f name="$name" --format "{{.Names}}" | grep -iq "^$name$"; the
 fi
 
 # run mysql5.7-db container
-if ! docker ps -q -f name="$name-db"; then
-  if ! docker ps -aq -f status=exited -f name="$name-db"; then
+if ! docker ps -q -f name="$name-db" --format "{{.Names}}" | grep -iq "^$name-db$"; then
+  if ! docker ps -aq -f status=exited -f name="$name-db" --format "{{.Names}}" | grep -iq "^$name-db$"; then
     docker run \
       -v "$volume/$name/data":/var/lib/mysql \
       --name "$name-db" mysql:5.7 \
