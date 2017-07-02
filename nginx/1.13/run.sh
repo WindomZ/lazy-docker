@@ -3,7 +3,7 @@
 [[ ! -r '.env.sh' ]] && (echo 'Not found .env file') && exit 1
 source .env.sh
 
-# whether or not to import nginx.conf
+# whether to import nginx.conf
 if [[ -s 'nginx.conf' ]]; then
   while true; do
     read -erp "Do you use nginx.conf?: [Y/n] " yn
@@ -14,8 +14,8 @@ if [[ -s 'nginx.conf' ]]; then
     esac
   done
 fi
-#[[ ${volume_nginx_conf} ]] && echo "YES" || echo "NO"
 
+# whether to overwrite nginx/conf.d
 for file in ./conf.d/*; do
   if [[ -f ${file} ]]; then
     volume_nginx_conf_d=true
@@ -32,10 +32,9 @@ if [[ ${volume_nginx_conf_d} ]]; then
     esac
   done
 fi
-#[[ ${volume_nginx_conf_d} ]] && echo "YES" || echo "NO"
 
 # remove nginx container
-if docker ps -aq -f name="$name" --format "{{.Names}}" | grep -iq "^${name}$"; then
+if docker ps -aq -f name="$name" --format "{{.Names}}" | grep -iq "^$name$"; then
   docker rm -f "$name" > /dev/null
 fi
 
