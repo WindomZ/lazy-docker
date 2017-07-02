@@ -1,22 +1,12 @@
 #!/usr/bin/env bash
-# specifies the configuration file.
-env=../.env
-[[ ! -f "$env" ]] && echo -e "\033[31mNot found\033[0m the \033[4m.env\033[0m file" && exit 1
-
-# specifies the name of docker container.
-name=$(sed '/^DOCKER_NAME=/!d;s/.*=//' "$env")
-[[ ! "$name" ]] && read -erp "Enter the name of docker container: [mysql8.0] " name
-[[ ! "$name" ]] && name="mysql8.0"
-
-# specifies the MYSQL data storage path.
-volume=$(sed '/^DOCKER_VOLUME=/!d;s/.*=//' "$env")
-[[ ! "$volume" ]] && read -erp "Enter the directory path for the MYSQL volume: [current path] " volume
-[[ ! "$volume" ]] && volume=$PWD
+# shellcheck disable=SC1091,SC2154
+[[ ! -r '../.env.sh' ]] && (echo 'Not found .env file') && exit 1
+source ../.env.sh
 
 if ! docker ps -q -f name="$name-db" --format "{{.Names}}" | grep -iq "^$name-db$"; then
   # remove mysql8.0-db container
   if docker ps -aq -f status=exited -f name="$name-db" --format "{{.Names}}" | grep -iq "^$name-db$"; then
-    docker rm ${name}-db > /dev/null
+    docker rm "$name-db" > /dev/null
   fi
 
   # run mysql8.0-db container
