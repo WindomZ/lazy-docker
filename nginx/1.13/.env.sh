@@ -12,7 +12,7 @@ name=$(sed '/^DOCKER_NAME=/!d;s/.*=//' ${env})
 # specifies the nginx host path.
 volume=$(sed '/^DOCKER_VOLUME=/!d;s/.*=//' ${env})
 [[ ! ${volume} ]] && read -erp "Enter the directory path for the nginx volume: [current path] " volume
-[[ ! ${volume} ]] && volume=${PWD}
+[[ ! ${volume} ]] && volume=$PWD
 
 # specifies the nginx external host port.
 port=$(sed '/^DOCKER_PORT=/!d;s/.*=//' ${env})

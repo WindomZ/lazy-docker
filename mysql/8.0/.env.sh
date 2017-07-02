@@ -12,7 +12,7 @@ name=$(sed '/^DOCKER_NAME=/!d;s/.*=//' "$env")
 # specifies the MYSQL data storage path.
 volume=$(sed '/^DOCKER_VOLUME=/!d;s/.*=//' "$env")
 [[ ! "$volume" ]] && read -erp "Enter the directory path for the MYSQL volume: [current path] " volume
-[[ ! "$volume" ]] && volume=${PWD}
+[[ ! "$volume" ]] && volume=$PWD
 
 # specifies the MYSQL external port.
 port=$(sed '/^DOCKER_PORT=/!d;s/.*=//' "$env")
