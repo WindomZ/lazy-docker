@@ -39,27 +39,19 @@ if docker ps -aq -f name="$name" --format "{{.Names}}" | grep -iq "^${name}$"; t
   docker rm -f "$name" > /dev/null
 fi
 
-[[ ${volume_nginx_conf} ]] \
-  && volume_nginx_conf="-v $PWD/nginx.conf:/etc/nginx/nginx.conf:ro" \
-  || unset volume_nginx_conf
-
-[[ ${volume_nginx_conf_d} ]] \
-  && volume_nginx_conf_d="-v $PWD/conf.d/:/etc/nginx/conf.d/" \
-  || unset volume_nginx_conf_d
-
 # build & run nginx container
-
-if output=$(docker run --restart=always \
-  -p "$port":80 \
-  -v "$volume/$name/html":/usr/share/nginx/html:ro \
-  -v "$volume/$name/logs":/var/log/nginx \
-  -v "$volume/$name"/share:/share \
-  "$volume_nginx_conf" \
-  "$volume_nginx_conf_d" \
-  --name "$name" -d nginx:1.13 > /dev/null); then
+cmd="docker run --restart=always \
+-p $port:80 \
+-v $volume/$name/html:/usr/share/nginx/html:ro \
+-v $volume/$name/logs:/var/log/nginx \
+-v $volume/$name/share:/share "
+[[ ${volume_nginx_conf} ]] && cmd="$cmd -v $PWD/nginx.conf:/etc/nginx/nginx.conf:ro"
+[[ ${volume_nginx_conf_d} ]] && cmd="$cmd -v $PWD/conf.d/:/etc/nginx/conf.d/"
+cmd="$cmd --name $name -d nginx:1.13 > /dev/null"
+if eval "${cmd}"; then
   [[ ! -r "$volume/$name"/html || ! -w "$volume/$name"/html ]] && sudo chmod -R a+rw "$volume/$name"/html
 else
-  echo -e "Created \033[4m$name\033[0m \033[31mFailed\033[0m: $output" && exit 1
+  echo -e "Created \033[4m$name\033[0m \033[31mFailed\033[0m!" && exit 1
 fi
 
 echo -e "Created \033[4m$name\033[0m \033[32mSuccessfully\033[0m!"
