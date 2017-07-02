@@ -7,7 +7,7 @@ source .env.sh
 if [[ -s 'nginx.conf' ]]; then
   while true; do
     read -erp "Do you use nginx.conf?: [Y/n] " yn
-    case ${yn} in
+    case "$yn" in
       [Yy]*|'' ) volume_nginx_conf=true; break;;
       [Nn]* ) break;;
       * ) echo "Please answer yes, y, no, or n.";;
@@ -17,7 +17,7 @@ fi
 
 # whether to overwrite nginx/conf.d
 for file in ./conf.d/*; do
-  if [[ -f ${file} ]]; then
+  if [[ -f "$file" ]]; then
     volume_nginx_conf_d=true
     break
   fi
@@ -25,7 +25,7 @@ done
 if [[ ${volume_nginx_conf_d} ]]; then
   while true; do
     read -erp "Do you overwrite nginx/conf.d?: [Y/n] " yn
-    case ${yn} in
+    case "$yn" in
       [Yy]*|'' ) break;;
       [Nn]* ) unset volume_nginx_conf_d; break;;
       * ) echo "Please answer yes, y, no, or n.";;
