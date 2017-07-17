@@ -15,7 +15,7 @@ Continuous improvement, lazy interactive design, for this purpose.
 
 - [x] [MySQL](#mysql)
 - [ ] MongoDB
-- [ ] Redis
+- [x] [Redis](#redis)
 - [ ] Node.js
 - [x] [nginx](#nginx)
 - [ ] Continue to add...
@@ -41,6 +41,12 @@ run as a [non-root](https://docs.docker.com/engine/installation/linux/linux-post
 [![Update Date](https://img.shields.io/badge/update-2017--07--02-brightgreen.svg?style=flat-square)](https://github.com/WindomZ/lazy-docker/tree/master/nginx#readme)
 
 - [x] [1.13 README](https://github.com/WindomZ/lazy-docker/tree/master/nginx/1.13#readme) - nginx1.13(_Run_)
+
+### Redis
+
+[![Update Date](https://img.shields.io/badge/update-2017--07--18-brightgreen.svg?style=flat-square)](https://github.com/WindomZ/lazy-docker/tree/master/redis#readme)
+
+- [x] [4 README](https://github.com/WindomZ/lazy-docker/tree/master/redis/4#readme) - Redis4(_Run+Backup+Restore_)
 
 ## Contributing
 
