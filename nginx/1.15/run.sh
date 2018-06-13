@@ -41,11 +41,11 @@ fi
 # build & run nginx container
 cmd="docker run --restart=always \
 -p $port:80 \
--v $volume/$name/html:/usr/share/nginx/html:ro \
--v $volume/$name/logs:/var/log/nginx \
--v $volume/$name/share:/share "
+-v $volume/$name/html:/usr/share/nginx/html/:rw \
+-v $volume/$name/logs:/var/log/nginx/:rw \
+-v $volume/$name/share:/share/:rw "
 [[ ${volume_nginx_conf} ]] && cmd="$cmd -v $PWD/nginx.conf:/etc/nginx/nginx.conf:ro"
-[[ ${volume_nginx_conf_d} ]] && cmd="$cmd -v $PWD/conf.d/:/etc/nginx/conf.d/"
+[[ ${volume_nginx_conf_d} ]] && cmd="$cmd -v $PWD/conf.d/:/etc/nginx/conf.d/:ro"
 cmd="$cmd --name $name -d nginx:1.15 > /dev/null"
 if eval "${cmd}"; then
   [[ ! -r "$volume/$name"/html || ! -w "$volume/$name"/html ]] && sudo chmod -R a+rw "$volume/$name"/html
